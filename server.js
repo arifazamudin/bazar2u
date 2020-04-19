@@ -1,7 +1,7 @@
 var express 	= require('express');
 var app 		= express();
 var port 		= process.env.PORT || 8080;
-var morgan 		= require('morgan');
+//var morgan 		= require('morgan');
 var mongoose 	= require('mongoose');
 var Page 		= require('./app/models/page');
 var Checkpoint = require('./app/models/checkpoints');
@@ -14,7 +14,7 @@ var expressValidator = require('express-validator');
 var fileUpload 	= require('express-fileupload');
 
 //database check
-mongoose.connect('mongodb://localhost:27017/makan2u',{useNewUrlParser:true,useUnifiedTopology:true},function(err){
+mongoose.connect('mongodb://makan2u:password123@ds121945.mlab.com:21945/heroku_t3jt7cpl',{useNewUrlParser:true,useUnifiedTopology:true},function(err){
 
 	if (err){
 		console.log('NOt connected to database' + err);
@@ -28,7 +28,7 @@ mongoose.connect('mongodb://localhost:27017/makan2u',{useNewUrlParser:true,useUn
 app.set('views',path.join(__dirname,'/public/app/view'));
 app.set('view engine','ejs'); 
 
-app.use(morgan('dev'));
+//app.use(morgan('dev'));
 
 
 
