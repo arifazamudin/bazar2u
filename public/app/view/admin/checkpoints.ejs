@@ -1,0 +1,27 @@
+<%- include('../_layouts/adminheader') %>
+
+<h2 class="page-title">Checkpoints</h2>
+<a href="/admin/checkpoints/add-checkpoint" class="btn btn-primary">Add a new checkpoint</a>
+<br><br>
+
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>Checkpoint</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% Checkpoints.forEach(function(cpt){ %>
+        <tr>
+            <td><%= cpt.title %></td>
+            <td><a href="/admin/checkpoints/edit-checkpoint/<%= cpt._id %>">Edit</a></td>
+            <td><a class="confirmDeletion" href="/admin/checkpoints/delete-checkpoint/<%= cpt._id %>">Delete</a></td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
+
+<%- include('../_layouts/adminfooter') %>
