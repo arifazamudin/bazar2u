@@ -226,14 +226,11 @@ router.get('/edit-product/:id', function (req, res) {
                 console.log(err);
                 res.redirect('/admin/products');
             } else {
-                //var galleryDir = 'public/product_images/' + p._id + '/gallery';
+                //var galleryDir = "https://bazar2you.s3-ap-southeast-1.amazonaws.com/product_images/" + p._id + '/gallery';
+                var galleryDir = null;
                 var galleryImages = null;
 
-                fs.readdir(galleryDir, function (err, files) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        galleryImages = files;
+                
 
                         res.render('admin/edit_product', {
                             title: p.title,
@@ -248,8 +245,8 @@ router.get('/edit-product/:id', function (req, res) {
                             //galleryImages: galleryImages,
                             id: p._id
                         });
-                    }
-                });
+                    
+                
             }
         });
 
