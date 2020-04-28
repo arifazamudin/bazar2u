@@ -226,7 +226,7 @@ router.get('/edit-product/:id', function (req, res) {
                 console.log(err);
                 res.redirect('/admin/products');
             } else {
-                var galleryDir = 'public/product_images/' + p._id + '/gallery';
+                //var galleryDir = 'public/product_images/' + p._id + '/gallery';
                 var galleryImages = null;
 
                 fs.readdir(galleryDir, function (err, files) {
@@ -245,7 +245,7 @@ router.get('/edit-product/:id', function (req, res) {
                             quantity: p.quantity,                           
                             price: parseFloat(p.price).toFixed(2),
                             image: p.image,
-                            galleryImages: galleryImages,
+                            //galleryImages: galleryImages,
                             id: p._id
                         });
                     }
