@@ -6,6 +6,9 @@ var router = express.Router();
 // Get Checkpoint model
 var Checkpoint = require('../models/checkpoints');
 
+
+
+
 /*
  * GET Checkpoint index
  */
@@ -17,7 +20,9 @@ router.get('/', function (req, res) {
         res.render('admin/checkpoints', {
             Checkpoints: checkpoints
         });
+        
     });
+    
 });
 
 /*
@@ -26,9 +31,11 @@ router.get('/', function (req, res) {
 router.get('/add-checkpoint', function (req, res) {
 
     var title = "";
+    var address = "";
 
     res.render('admin/add_checkpoint', {
-        title: title
+        title: title,
+        address: address
     });
 
 });
@@ -42,25 +49,29 @@ router.post('/add-checkpoint', function (req, res) {
 
     var title = req.body.title;
     var slug = title.replace(/\s+/g, '-').toLowerCase();
+    var address = req.body.address;
 
     var errors = req.validationErrors();
 
     if (errors) {
         res.render('admin/add_checkpoint', {
             errors: errors,
-            title: title
+            title: title,
+            address: address
         });
     } else {
         Checkpoint.findOne({slug: slug}, function (err, checkpoint) {
             if (checkpoint) {
                 req.flash('danger', 'Checkpoint title exists, choose another.');
                 res.render('admin/add_checkpoint', {
-                    title: title
+                    title: title,
+                    address: address
                 });
             } else {
                 var checkpoint = new Checkpoint({
                     title: title,
-                    slug: slug
+                    slug: slug,
+                    address: address
                 });
 
                 checkpoint.save(function (err) {
@@ -181,6 +192,29 @@ router.get('/delete-checkpoint/:id', function (req, res) {
         res.redirect('/admin/checkpoints/');
     });
 });
+
+
+
+// /*
+//  * GET products by category
+//  */
+// router.get('/:checkpoint', function (req, res) {
+
+//     var checkpointSlug = req.params.checkpoint;
+
+//     Checkpoint.findOne({slug: checkpointSlug}, function (err, c) {
+//         Product.find({category: checkpointSlug}, function (err, products) {
+//             if (err)
+//                 console.log(err);
+
+//             res.render('cat_products', {
+//                 title: c.title,
+//                 products: products
+//             });
+//         });
+//     });
+
+// });
 
 
 // Exports

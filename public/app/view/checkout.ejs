@@ -1,0 +1,346 @@
+  
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>bazar2you</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- trick for css error -->
+      <base href="/">  
+    
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700|Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+
+    
+
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.css" rel="stylesheet" />
+  </head>
+  <body data-spy="scroll" data-target="#site-navbar" data-offset="200">
+    
+    <nav class="navbar navbar-expand-lg navbar-dark site_navbar bg-dark site-navbar-light" id="site-navbar">
+      <div class="container">
+        <a class="navbar-brand" href="/index">Bazar2u</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#site-nav" aria-controls="site-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="oi oi-menu"></span> Menu
+        </button>
+
+        <div class="collapse navbar-collapse" id="site-nav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active"><a href="#section-home" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="#section-menu" class="nav-link">Menu</a></li>
+            <li class="nav-item">
+              <a href="/cart/checkout" class="nav-link">My Cart (
+                  <% if (typeof cart !== "undefined") { %>
+                  <%= cart.length %>
+                  <% } else {%>
+                  0
+                  <% } %>
+              )</a>
+          </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- END nav -->
+
+
+    
+    <section class="site-section bg-light" >
+        <div class="container">
+          
+            <% if (typeof cart !== "undefined") { %>
+                <h1 class="page-title">My Cart</h1>
+                <br><br>
+                <table class="table table-striped alignmiddle">
+                    
+                    <tr>
+                        <th>Image</th>
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th></th>
+                        <th>Subtotal</th>
+                    </tr>
+                    
+                    <% var total = 0; %>
+                    <% cart.forEach(function(product){ %>
+                    <% var sub = parseFloat(product.qty * product.price).toFixed(2) %>
+                    <% total += +sub %>
+                    <tr>
+                        <td><img class="cpi" src="<%= product.image %>" alt=""></td>
+                        <td><%= product.title %></td>
+                        <td>RM<%= product.price %></td>
+                        <td><%= product.qty %></td>
+                        <td>
+                            <a href="/cart/update/<%= product.title %>?action=add">+</a>&nbsp;
+                            <a href="/cart/update/<%= product.title %>?action=remove">-</a>&nbsp;
+                            <a href="/cart/update/<%= product.title %>?action=clear">Clear</a>&nbsp;
+                        </td>
+                        <td>RM<%= sub %></td>
+                    </tr>
+                    <% }); %>
+                    <tr>
+                        <td colspan="6" align="right"><b>Total: </b> $<%= parseFloat(total).toFixed(2) %></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" align="right">
+                            <a class="clearcart btn btn-danger" href="/cart/clear">Clear cart</a>
+                        </td>
+                        <td colspan="5" align="right">
+                            <a class="btn btn-primary buynow" href="#" target="_blank" data-toggle="modal" data-target="#reservationModal">Buy now</a>
+                        </td>
+                    </tr>
+                    
+                </table>
+                <form class="pp" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+                <input type="hidden" name="cmd" value="_cart">
+                <input type="hidden" name="upload" value="1">
+                <input type="hidden" name="business" value="jultranet-facilitator@gmail.com">
+                <% var num = 0; %>
+                <% cart.forEach(function(p){ %>
+                    <% num++ %>
+                    <input type="hidden" name="item_name_<%= num %>" value="<%= p.title %>">
+                    <input type="hidden" name="amount_<%= num %>" value="<%= p.price %>">
+                    <input type="hidden" name="quantity_<%= num %>" value="<%= p.qty %>">
+                <% }); %>
+                <input type="hidden" name="currency_code" value="USD">
+                <input type="hidden" name="amount" value="<%= total %>">
+                <input type="image" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+                </form>
+                <% } else {%>
+                <h3 class="text-center">Your cart is empty.</h3>
+                <% } %>
+                
+    
+
+                
+            
+            
+        </div>
+      </section>
+
+   
+    <!-- END section -->
+
+    
+    
+
+    
+
+    <footer class="site-footer site-bg-dark site-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-4 site-animate">
+                <h2 class="site-heading-2">About Us</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, similique, delectus blanditiis odit expedita amet. Sed labore ipsum vel dolore, quis, culpa et magni autem sequi facere eos tenetur, ex?</p>
+              </div>
+              <div class="col-md-1"></div>
+              <div class="col-md-3 site-animate">
+                <div class="site-footer-widget mb-4">
+                  <h2 class="site-heading-2">The Restaurant</h2>
+                  <ul class="list-unstyled">
+                    <li><a href="#" class="py-2 d-block">About Us</a></li>
+                    <li><a href="#" class="py-2 d-block">Chefs</a></li>
+                    <li><a href="#" class="py-2 d-block">Events</a></li>
+                    <li><a href="#" class="py-2 d-block">Contact</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-2 site-animate">
+                 <div class="site-footer-widget mb-4">
+                  <h2 class="site-heading-2">Useful links</h2>
+                  <ul class="list-unstyled">
+                    <li><a href="#" class="py-2 d-block">Foods</a></li>
+                    <li><a href="#" class="py-2 d-block">Drinks</a></li>
+                    <li><a href="#" class="py-2 d-block">Breakfast</a></li>
+                    <li><a href="#" class="py-2 d-block">Brunch</a></li>
+                    <li><a href="#" class="py-2 d-block">Dinner</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-2 site-animate">
+                 <div class="site-footer-widget mb-4">
+                  <h2 class="site-heading-2">Useful links</h2>
+                  <ul class="list-unstyled">
+                    <li><a href="#" class="py-2 d-block">Foods</a></li>
+                    <li><a href="#" class="py-2 d-block">Drinks</a></li>
+                    <li><a href="#" class="py-2 d-block">Breakfast</a></li>
+                    <li><a href="#" class="py-2 d-block">Brunch</a></li>
+                    <li><a href="#" class="py-2 d-block">Dinner</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+        </div>
+        <div class="row site-animate">
+           <div class="col-md-12 text-center">
+            <div class="site-footer-widget mb-4">
+              <ul class="site-footer-social list-unstyled ">
+                <li class="site-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class="site-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class="site-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-12 text-center">
+            <p>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    
+    
+
+    
+    <!-- Modal -->
+    <div class="modal fade" id="reservationModal" tabindex="-1" role="dialog" aria-labelledby="reservationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="bg-image" style="background-image: url(images/bg_14.jpg);"></div>
+                </div>
+                <div class="col-lg-12 p-5">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <small>CLOSE </small><span aria-hidden="true">&times;</span>
+                  </button>
+                  <h1 class="mb-4">Order Confirmation</h1>  
+                  <form action="/cart/checkout/confirmation" method="post">
+                    <div class="row">
+                      <div class="col-md-12 form-group">
+                        <label for="m_fname">Name</label>
+                        <input type="text" class="form-control" id="m_fname" name="name" >
+                      </div>
+                      
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label for="m_phone">Phone #1</label>
+                            <input type="text" class="form-control" id="m_phone1" name="phone1">
+                        </div>
+                      <div class="col-md-6 form-group">
+                        <label for="m_phone">Phone #2</label>
+                        <input type="text" class="form-control" id="m_phone2" name="phone2">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 form-group">
+                        <label for="m_email">Address Line #1</label>
+                        <input type="text" class="form-control" id="m_address1" name="add1">
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                          <label for="m_email">Address Line #2</label>
+                          <input type="text" class="form-control" id="m_address2" name="add2">
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 form-group">
+                        <label for="m_date">Poscode</label>
+                        <input type="text" class="form-control" id="m_poscode" name="postcode">
+                      </div>
+                      <div class="col-md-6 form-group">
+                        <label for="m_time">City</label>
+                        <input type="text" class="form-control" id="m_city" name="city">
+                      </div>
+                    </div>
+  
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label for="m_people">State</label>
+                            <select name="state" id="m_state" class="form-control">
+                              <option value="Johor">Johor</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                      <div class="col-md-12 form-group">
+                        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Confirm">
+                      </div>
+                    </div>
+  
+                  </form>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- END Modal -->
+
+    <!-- loader -->
+    <div id="site-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+\
+
+<script>
+    
+    $(function() {
+       
+        $('a.clearcart').on('click', function () {
+            if (!confirm('Confirm clear cart'))
+                return false;
+        });
+        
+        // $('a.buynow').on('click', function (e) {
+        //     e.preventDefault();
+            
+        //     $.get('/cart/buynow', function() {
+        //         $('form.pp input[type=image]').click();
+        //         $('.ajaxbg').show();
+        //     });
+        // });
+            
+    });
+        
+    </script>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/jquery.timepicker.min.js"></script>
+    
+    <script src="js/jquery.animateNumber.min.js"></script>
+    
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="js/google-map.js"></script>
+
+    <script src="js/main.js"></script>
+    <script src="/js/map.js"></script>
+
+    
+  </body>
+</html>

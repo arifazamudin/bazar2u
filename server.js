@@ -6,12 +6,21 @@ var mongoose 	= require('mongoose');
 var Page 		= require('./app/models/page');
 var Checkpoint = require('./app/models/checkpoints');
 var bodyParser 	= require('body-parser');
-var session 	= require('express-session');
+const session 	= require('express-session');
 var router		= express.Router();
 //var appRoutes	= require('./app/routes/api')(router);
 var path		= require('path');
 var expressValidator = require('express-validator');
 var fileUpload 	= require('express-fileupload');
+
+const dotenv    =require('dotenv');
+const cors  = require('cors');
+
+var AWS         = require('aws-sdk');
+
+dotenv.config({path: './config/config.env'});
+app.use(cors()); 
+
 
 //database check
 mongoose.connect('mongodb://makan2u:password123@ds121945.mlab.com:21945/heroku_t3jt7cpl',{useNewUrlParser:true,useUnifiedTopology:true},function(err){
@@ -29,6 +38,15 @@ app.set('views',path.join(__dirname,'/public/app/view'));
 app.set('view engine','ejs'); 
 
 //app.use(morgan('dev'));
+
+
+
+//s3
+AWS.config.update({
+    accessKeyId: "AKIAJELWBWAYWUG5CL3A",
+    secretAccessKey: "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",
+    region: 'ap-southeast-1'
+  });
 
 
 
@@ -78,6 +96,14 @@ app.use(function (req, res, next) {
   next();
 });
 
+//cart
+app.get('*',function(req,res,next){
+  res.locals.checkpoint = req.session.checkpoint;
+  res.locals.cart = req.session.cart;
+  next();
+})
+
+
 // Express Validator middleware
 app.use(expressValidator({
   errorFormatter: function (param, msg, value) {
@@ -116,15 +142,27 @@ app.use(expressValidator({
 //set routes
 var api = require('./app/routes/api');
 var products = require('./app/routes/products');
+var location = require('./app/routes/location');
+var cart = require('./app/routes/cart');
+
 var admin = require('./app/routes/admin_pages');
 var adminCheckpoints = require('./app/routes/admin_checkpoint.js');
 var adminProducts= require('./app/routes/admin_products');
+var adminOrders= require('./app/routes/admin_orders');
+
+
+
 
 app.use('/',api); //+ api file
 app.use('/products',products);
 app.use('/admin/pages',admin);
 app.use('/admin/checkpoints',adminCheckpoints);
 app.use('/admin/products',adminProducts);
+app.use('/admin/orders',adminOrders);
+
+app.use('/location',location);
+app.use('/cart',cart);
+
 
 
 

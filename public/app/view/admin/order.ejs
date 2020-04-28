@@ -1,0 +1,57 @@
+<%- include('../_layouts/adminheader') %>
+
+<h2 class="page-title">Order Management</h2>
+
+<br><br>
+
+<% Order.forEach(function(o){ %>
+<table class="table table-striped">
+
+    <tr>
+        <th>Checkpoint</th>
+        <td><%= o.checkpoint %></td>
+    </tr>
+    <tr>
+        <th>Order ID</th>
+        <td><%= o.OrderID %></td>
+    </tr>
+     
+    <tr>
+        <th>Name</th>
+        <td><%= o.Name %></td>
+    </tr>
+    <tr>
+        <th>Address</th>
+        <td><%= o.address %></td>
+    </tr>
+    <tr>
+        <th>Phone#1</th>
+        <td><%= o.PhoneNum1 %></td>
+        
+    </tr>
+    <tr>
+        <th>Phone#2</th>
+        <td><%= o.PhoneNum2 %></td>
+    </tr>
+    <tr>
+        <th>Product</th>
+        <td>
+        <% o.ProductsOrdered.forEach(function(p){ %>
+         <p><%=p.qty%> - <%= p.title %></p>
+        <% }); %>
+        </td>
+    </tr>
+    <tr>
+        <th>CreatedAt</th>
+        <td><%= o.createdAt %></td>
+    </tr>
+   
+</table>
+
+<br><br>
+<% }); %>
+
+
+
+
+<%- include('../_layouts/adminfooter') %>

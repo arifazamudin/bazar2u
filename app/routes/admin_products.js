@@ -1,8 +1,20 @@
-var express = require('express');
-var router = express.Router();
-var mkdirp = require('mkdirp');
-var fs = require('fs-extra');
-var resizeImg = require('resize-img');
+const express = require('express');
+const router = express.Router();
+const mkdirp = require('mkdirp');
+const fs = require('fs-extra');
+const resizeImg = require('resize-img');
+const AWS = require('aws-sdk');
+//const path = require('path');
+const fileUpload = require('express-fileupload');
+
+
+const s3 = new AWS.S3();
+
+
+
+  
+
+
 //var auth = require('../config/auth');
 //var isAdmin = auth.isAdmin;
 
@@ -17,16 +29,27 @@ var Checkpoint = require('../models/checkpoints');
  */
 router.get('/', function (req, res) {
     var count;
-
+    
+    
     Product.count(function (err, c) {
         count = c;
     });
 
     Product.find(function (err, products) {
+        // var params = { Bucket: 'bazar2you', Key: 'product_images/' + products._id + '/' };
+        // s3.getObject(params, function (err, data) {
+        //     if (err) {
+        //         return res.send({ "error": err });
+        //     }
+        //     res.send({ data });
+        // });
+    
         res.render('admin/products', {
+            
             products: products,
             count: count
         });
+        
     });
 });
 
@@ -143,11 +166,37 @@ router.post('/add-product', function (req, res) {
 
                     if (imageFile != "") {
                         var productImage = req.files.image;
-                        var path = 'public/product_images/' + product._id + '/' + imageFile;
+                        var paths = 'product_images/' + product._id + '/' + imageFile;
+                        //var path = imageFile;
+                        //const filePath = path.join(__dirname, +'/' + imageFile);
+                        console.log(productImage);
+                        //const fileContent = fs.readFileSync(productImage.data);
 
-                        productImage.mv(path, function (err) {
-                            return console.log(err);
+                        const params = {
+                            Bucket: 'bazar2you',
+                            Key: paths, // File name you want to save as in S3
+                            Body: productImage.data
+                        };
+
+                        s3.upload(params, function(err, data) {
+                            if (err) {
+                                throw err;
+                            }
+                            console.log(`File uploaded successfully. ${data.Location}`);
                         });
+
+                        // s3.putObject(params,function(err,data){
+
+                        //     if(err){
+                        //         console.log(err);
+                        //     } else {
+                        //         console.log(data);
+                        //     }
+                        // })
+
+                        // productImage.mv(path, function (err) {
+                        //     return console.log(err);
+                        // });
                     }
 
                     req.flash('success', 'Product added!');
@@ -278,7 +327,7 @@ router.post('/edit-product/:id', function (req, res) {
                             var productImage = req.files.image;
                             var path = 'public/product_images/' + id + '/' + imageFile;
 
-                            productImage.mv(path, function (err) {
+                            bucket.productImage.mv(path, function (err) {
                                 return console.log(err);
                             });
 

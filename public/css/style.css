@@ -1,5 +1,6 @@
 img.pimage {
-    width: 150px;
+    /* width: 200px; */
+    height: 150px;
 }
 
 .line {
@@ -58,6 +59,38 @@ table.alignmiddle td {
     border-color: #ebccd1;
 }
 
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  /* max-width: 300px; */
+  width: 200px;
+  /* height: 500px;  */
+  margin: 10px;
+  text-align: center;
+  font-family: arial;
+  display: inline-block;
+}
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
+
 
 
 
@@ -75,14 +108,14 @@ html {
     background: rgb(179, 27, 27);
     font-size: 16px;
     line-height: 1.6;
-    color: #b8b8b8;
+    color: #000000;
   }
   
   a {
     -webkit-transition: .3s all ease;
     -o-transition: .3s all ease;
     transition: .3s all ease;
-    color: #FDA403;
+    color: rgb(0, 0, 0);
   }
   
   a:hover {
@@ -453,8 +486,8 @@ html {
   }
   
   .btn.btn-primary {
-    background: #FDA403;
-    border-color: #FDA403;
+    background: rgb(250, 1, 1);
+    border-color: rgb(253, 3, 3);
     color: #fff;
   }
   

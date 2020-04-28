@@ -24,31 +24,39 @@ router.get('/', function (req, res) {
             title: 'All products',
             products: products
         });
+        
     });
 
 });
 
 
-// /*
-//  * GET products by category
-//  */
-// router.get('/:checkpoint', function (req, res) {
 
-//     var checkpointSlug = req.params.checkpoint;
 
-//     Checkpoint.findOne({slug: checkpointSlug}, function (err, c) {
-//         Product.find({category: checkpointSlug}, function (err, products) {
-//             if (err)
-//                 console.log(err);
+/*
+ * GET products by category
+ */
+router.get('/:checkpoint', function (req, res) {
+    
+    
 
-//             res.render('cat_products', {
-//                 title: c.title,
-//                 products: products
-//             });
-//         });
-//     });
+    var checkpointSlug = req.params.checkpoint;
+    req.session.checkpoint = req.params.checkpoint;
+    
 
-// });
+    Checkpoint.findOne({slug: checkpointSlug}, function (err, c) {
+        Product.find({checkpoint: checkpointSlug}, function (err, products) {
+            if (err)
+                console.log(err);
+
+            res.render('cpt_product', {
+                
+                products: products
+            });
+            
+        });
+    });
+
+});
 
 // /*
 //  * GET product details
