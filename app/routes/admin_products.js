@@ -325,11 +325,26 @@ router.post('/edit-product/:id', function (req, res) {
                             }
 
                             var productImage = req.files.image;
-                            var path = 'public/product_images/' + id + '/' + imageFile;
+                            var paths = 'product_images/' + id + '/' + imageFile;
+                            //var path = imageFile;
+                            //const filePath = path.join(__dirname, +'/' + imageFile);
+                            //console.log(productImage);
+                            //const fileContent = fs.readFileSync(productImage.data);
 
-                            bucket.productImage.mv(path, function (err) {
-                                return console.log(err);
+                            const params = {
+                                Bucket: 'bazar2you',
+                                Key: paths, // File name you want to save as in S3
+                                Body: productImage.data
+                            };
+
+                            s3.upload(params, function(err, data) {
+                                if (err) {
+                                    throw err;
+                                }
+                                console.log(`File uploaded successfully. ${data.Location}`);
                             });
+
+                        
 
                         }
 

@@ -46,6 +46,7 @@ router.get('/add-checkpoint', function (req, res) {
 router.post('/add-checkpoint', function (req, res) {
 
     req.checkBody('title', 'Title must have a value.').notEmpty();
+    req.checkBody('address','Address must have a value.').notEmpty();
 
     var title = req.body.title;
     var slug = title.replace(/\s+/g, '-').toLowerCase();
