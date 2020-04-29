@@ -788,6 +788,13 @@ html {
     background: #fff;
     border-radius: 0px;
   }
+
+  .center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
   
   .site-media.text-center .site-icon {
     margin: 0 auto;
