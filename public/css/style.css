@@ -349,6 +349,14 @@ html {
     right: 0;
   }
   
+  .putih{
+    color:white;
+  }
+
+  .kotak-putih{
+    background-color: rgba(0, 0, 0, 0.336);
+  }
+  
   .site-cover .site-vh-100 {
     min-height: 700px !important;
   }
@@ -670,6 +678,7 @@ html {
   
   .site-footer .site-heading {
     font-size: 24px;
+    
   }
   
   .site-footer .site-heading-2 {

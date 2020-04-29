@@ -41,7 +41,7 @@
             
             <li class="nav-item"><a href="#section-menu" class="nav-link">Menu</a></li>
             
-            <li class="nav-item"><a href="#section-gallery" class="nav-link">Gallery</a></li>
+            <!-- <li class="nav-item"><a href="#section-gallery" class="nav-link">Gallery</a></li> -->
             
           </ul>
         </div>
@@ -53,24 +53,57 @@
     
     <section class="site-section bg-light" >
         <div class="container">
+
+          <div >
+            <p>Kawasan penghantaran kami adalah terhad. Kami akan mencuba sedaya upaya untuk menambah kawasan penghantaran dalam waktu terdekat. Kami memohon jasa baik untuk mengisi maklum balas dibawah bagi menambah baik perkhidmatan kami.</p>
+          </div>
+          <div >
+            <img class="spi" src="images/Proto 02.png">
+              <!-- <iframe id="google-map" width="100%" height="100%" frameboarder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.uk?output=embed"></iframe> -->
+            </img>
+          </div>
           
-            <div
+            <!-- <div
             id="map"
             style="width: 100%; height: 200px;border-radius: 20px;">
-            </div>
+            </div> -->
             <br>
             <div >
-                <h2 for="">Choose your bazaar</h2>
+                <h2 for="">Pilih lokasi anda</h2>
                 <% checkpoints.forEach(function(c){ %>
                     <li class="list-group-item"><a href="/products/<%= c.slug %>"><%= c.title %></a></li>
                 <% }); %>
             </div>
+
+          <div>
+            <p>Klik <u><a href="https://wasap.my/60187700704"> sini</a></u> untuk sebarang pertanyaan</p>
+          </div>
             
         </div>
       </section>
 
     <section class="site-section bg-light" >
       <div class="container">
+        <h4>Permohonan lokasi baharu</h4>
+        <div class="col-md-7 mb-5 site-animate">
+          <form action="" method="post">
+            <div class="form-group">
+              <label for="name" class="sr-only">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Nama">
+            </div>
+            <div class="form-group">
+              <label for="email" class="sr-only">No Tel:</label>
+              <input type="text" class="form-control" id="email" placeholder="No Tel:">
+            </div>
+            <div class="form-group">
+              <label for="message" class="sr-only">Alamat</label>
+              <textarea name="message" id="message" cols="30" rows="5" class="form-control" placeholder="Alamat"></textarea>
+            </div>
+            <div class="form-group">
+              <input type="submit" class="btn btn-primary btn-lg" value="Mohon">
+            </div>
+          </form>
+        </div>
         
         
       </div>
