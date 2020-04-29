@@ -1,6 +1,7 @@
 img.pimage {
-    /* width: 200px; */
-    height: 150px;
+    width: 300px;
+    height: 300px;
+    margin: 20px;
 }
 
 .line {
@@ -60,10 +61,11 @@ table.alignmiddle td {
 }
 
 .card {
+  
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   /* max-width: 300px; */
-  width: 200px;
-  /* height: 500px;  */
+  width: 600px;
+  height: auto; 
   margin: 10px;
   text-align: center;
   font-family: arial;
@@ -104,7 +106,7 @@ html {
   }
   
   body {
-    font-family: "Raleway", sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     background: rgb(179, 27, 27);
     font-size: 16px;
     line-height: 1.6;
@@ -127,7 +129,7 @@ html {
   .h1, .h2, .h3, .h4, .h5 {
     line-height: 1.45;
     color: #000;
-    font-family: "Playfair Display", serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: bold;
   }
   
@@ -283,7 +285,7 @@ html {
   }
   
   .bg-image, .site-cover {
-    background-size: cover;
+    background-size:contain;
     background-repeat: no-repeat;
     
   }
@@ -354,7 +356,7 @@ html {
   }
 
   .kotak-putih{
-    background-color: rgba(0, 0, 0, 0.336);
+    background-color: rgba(0, 0, 0, 0.473);
   }
   
   .site-cover .site-vh-100 {
@@ -420,6 +422,7 @@ html {
   @media screen and (max-width: 768px) {
     .display-4 {
       font-size: 37px;
+      align-content: center;
     }
   }
   
@@ -453,11 +456,11 @@ html {
     padding-left: 30px;
     padding-right: 30px;
     font-size: 16px;
-    font-family: "Playfair Display", serif;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
   
   .btn.btn-lg {
-    font-size: 16px !important;
+    font-size: 30px !important;
     padding: 13px 40px !important;
   }
   
@@ -505,8 +508,9 @@ html {
   }
   
   .btn.btn-outline-white {
-    border-color: rgba(255, 255, 255, 0.8);
-    background: none;
+    border-color: rgba(0, 0, 0, 0.8);
+    background: rgb(255, 255, 255);
+    color: #000;
     border-radius: 0px;
     border-width: 2px;
   }

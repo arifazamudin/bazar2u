@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>bazar2u</title>
+    <title>bazar2you</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -34,15 +34,14 @@
     
     <nav class="navbar navbar-expand-lg navbar-dark site_navbar bg-dark site-navbar-light" id="site-navbar">
       <div class="container">
-        <a class="navbar-brand" href="/index">Bazar2u</a>
+        <a class="navbar-brand" href="/#">Bazar2you</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#site-nav" aria-controls="site-nav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="oi oi-menu"></span> Menu
         </button>
 
         <div class="collapse navbar-collapse" id="site-nav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active"><a href="#section-home" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="#section-menu" class="nav-link">Menu</a></li>
+                <li class="nav-item"><a href="#section-menu" class="nav-link">Menu</a></li>
             <li class="nav-item">
               <a href="/cart/checkout" class="nav-link">My Cart (
                   <% if (typeof cart !== "undefined") { %>
@@ -60,30 +59,30 @@
 
 
     
-    <section class="site-section bg-light" >
-        <div class="container">
-          
+    <section class="site-section bg-light " >
+        
+          <div class="justify-content-center">
             
     
                 <% products.forEach(function(p){ %>
                         <div class="card">
                             
-                            <img class="pimage" src="https://bazar2you.s3.ap-southeast-1.amazonaws.com/product_images/<%= p.id %>/<%= p.image %> " style="width:100%" alt="">
+                            <img class="pimage" src="https://bazar2you.s3.ap-southeast-1.amazonaws.com/product_images/<%= p.id %>/<%= p.image %> " style="width:auto" alt="">
                             
-                            <div style="height:100%; width: 100%;">
-                              <p> <%= p.title %></p>
+                            
+                              <h3> <%= p.title %></h3>
+                              <p> <%=p.desc %></p>
                               <p class="price">RM<%= parseFloat(p.price).toFixed(2) %></p>
-                              
                               <p ><a class="btn btn-primary" href="/cart/add/<%= p.slug %>">Add to Cart</a></p>
 
-                            </div>
+                            
                             
                         </div>
                     <% }); %>
                 
+                  </div> 
             
-            
-        </div>
+        
       </section>
 
    
@@ -192,15 +191,7 @@
          
         </div>
         <div class="row site-animate">
-           <div class="col-md-12 text-center">
-            <div class="site-footer-widget mb-4">
-              <ul class="site-footer-social list-unstyled ">
-                <li class="site-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="site-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="site-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-              </ul>
-            </div>
-          </div>
+           
           <div class="col-md-12 text-center">
             <p>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>

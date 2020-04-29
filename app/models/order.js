@@ -29,6 +29,10 @@ var OrderSchema = mongoose.Schema({
     checkpoint: {
         type: String
     },
+    method:{
+        type: String
+
+    },
     createdAt: {
       type: Date,
       default: Date.now

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>bazar2u</title>
+    <title>Bazar2you</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -29,14 +29,14 @@
     
     <nav class="navbar navbar-expand-lg navbar-dark site_navbar bg-dark site-navbar-light" id="site-navbar">
       <div class="container">
-        <a class="navbar-brand" href="/index">Bazar2u</a>
+        <a class="navbar-brand" href="/#">Bazar2you</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#site-nav" aria-controls="site-nav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="oi oi-menu"></span> Menu
         </button>
 
         <div class="collapse navbar-collapse" id="site-nav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active"><a href="#section-home" class="nav-link">Home</a></li>
+            
             <li class="nav-item"><a href="#section-about" class="nav-link">About</a></li>
             
             <li class="nav-item"><a href="#section-menu" class="nav-link">Menu</a></li>
@@ -54,13 +54,14 @@
     <section class="site-section bg-light" >
         <div class="container">
 
+         
           <div >
-            <p>Kawasan penghantaran kami adalah terhad. Kami akan mencuba sedaya upaya untuk menambah kawasan penghantaran dalam waktu terdekat. Kami memohon jasa baik untuk mengisi maklum balas dibawah bagi menambah baik perkhidmatan kami.</p>
-          </div>
-          <div >
-            <img  class="center"  src="images/Proto 02.png">
+            <img width="100%"  src="images/Proto 02.png">
               <!-- <iframe id="google-map" width="100%" height="100%" frameboarder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.uk?output=embed"></iframe> -->
             </img>
+          </div>
+          <div >
+            <p>Kawasan penghantaran kami adalah terhad. Kami akan mencuba sedaya upaya untuk menambah kawasan penghantaran dalam waktu terdekat. Kami memohon jasa baik untuk mengisi maklum balas dibawah bagi menambah baik perkhidmatan kami.</p>
           </div>
           
             <!-- <div
@@ -71,10 +72,14 @@
             <div >
                 <h2 for="">Pilih lokasi anda</h2>
                 <% checkpoints.forEach(function(c){ %>
+                  <% if (c.title === "Kempas"|| c.title === "Taman Perling"|| c.title === "Mutiara Rini") {%>
+                    <li class="list-group-item"><a href="/location"><%= c.title %> (Coming Soon)</a></li>
+                    <% } else {%>
                     <li class="list-group-item"><a href="/products/<%= c.slug %>"><%= c.title %></a></li>
-                <% }); %>
+                    <% } %>
+                    <% }); %>
             </div>
-
+            <br>
           <div>
             <p>Klik <u><a href="https://wasap.my/60187700704"> sini</a></u> untuk sebarang pertanyaan</p>
           </div>
@@ -170,58 +175,16 @@
             <div class="row">
               <div class="col-md-4 site-animate">
                 <h2 class="site-heading-2">About Us</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, similique, delectus blanditiis odit expedita amet. Sed labore ipsum vel dolore, quis, culpa et magni autem sequi facere eos tenetur, ex?</p>
+                <p>Bazar2you merupakan satu platform yang menghubungkan pembeli dan peniaga bazar Ramadhan yang terjejas akibat penularan wabak covid-19. Pembelian dilakukan dengan hanya semudah satu transaksi.</p>
               </div>
               <div class="col-md-1"></div>
-              <div class="col-md-3 site-animate">
-                <div class="site-footer-widget mb-4">
-                  <h2 class="site-heading-2">The Restaurant</h2>
-                  <ul class="list-unstyled">
-                    <li><a href="#" class="py-2 d-block">About Us</a></li>
-                    <li><a href="#" class="py-2 d-block">Chefs</a></li>
-                    <li><a href="#" class="py-2 d-block">Events</a></li>
-                    <li><a href="#" class="py-2 d-block">Contact</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-md-2 site-animate">
-                 <div class="site-footer-widget mb-4">
-                  <h2 class="site-heading-2">Useful links</h2>
-                  <ul class="list-unstyled">
-                    <li><a href="#" class="py-2 d-block">Foods</a></li>
-                    <li><a href="#" class="py-2 d-block">Drinks</a></li>
-                    <li><a href="#" class="py-2 d-block">Breakfast</a></li>
-                    <li><a href="#" class="py-2 d-block">Brunch</a></li>
-                    <li><a href="#" class="py-2 d-block">Dinner</a></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-md-2 site-animate">
-                 <div class="site-footer-widget mb-4">
-                  <h2 class="site-heading-2">Useful links</h2>
-                  <ul class="list-unstyled">
-                    <li><a href="#" class="py-2 d-block">Foods</a></li>
-                    <li><a href="#" class="py-2 d-block">Drinks</a></li>
-                    <li><a href="#" class="py-2 d-block">Breakfast</a></li>
-                    <li><a href="#" class="py-2 d-block">Brunch</a></li>
-                    <li><a href="#" class="py-2 d-block">Dinner</a></li>
-                  </ul>
-                </div>
-              </div>
+              
             </div>
           </div>
          
         </div>
         <div class="row site-animate">
-           <div class="col-md-12 text-center">
-            <div class="site-footer-widget mb-4">
-              <ul class="site-footer-social list-unstyled ">
-                <li class="site-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="site-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="site-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-              </ul>
-            </div>
-          </div>
+          
           <div class="col-md-12 text-center">
             <p>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>

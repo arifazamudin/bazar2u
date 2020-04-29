@@ -10,7 +10,8 @@ var Checkpoint = require('../models/checkpoints');
  */
 router.get('/', function (req, res) {
 
-    //req.session.destroy();
+    delete req.session.cart;
+    delete req.session.checkpoints;
     
     Checkpoint.find(function (err, checkpoints) {
         if (err)

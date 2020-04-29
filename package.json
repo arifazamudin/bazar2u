@@ -28,6 +28,7 @@
     "mkdirp": "^1.0.4",
     "mongoose": "^5.9.9",
     "node-geocoder": "^3.27.0",
+    "open": "^7.0.3",
     "resize-img": "^2.0.0"
   }
 }

@@ -4,8 +4,17 @@
 
 <br><br>
 
+<select name="checkpoint" class="form-control" id="checkp">
+    <% checkpoints.forEach(function(cpt){ %>
+        <option value="<%= cpt.slug %>"><%= cpt.title %></option>
+    <% }); %>
+</select>
+
+<a href="/admin/orders/sort" class="btn btn-primary" onclick="GetSelectedValue()" >Find</a>
+  <br><br>
+
 <% Order.forEach(function(o){ %>
-<table class="table table-striped">
+<table class="table table-bordered">
 
     <tr>
         <th>Checkpoint</th>
@@ -42,8 +51,16 @@
         </td>
     </tr>
     <tr>
+        <th>Method:</th>
+        <td><%= o.method %></td>
+        
+    </tr>
+    <tr>
         <th>CreatedAt</th>
         <td><%= o.createdAt %></td>
+    </tr>
+    <tr>
+        <td><a class="confirmDeletion" href="/admin/orders/delete-order/<%= o._id %>">Delete</a></td>
     </tr>
    
 </table>
@@ -51,7 +68,13 @@
 <br><br>
 <% }); %>
 
+<script >
+   function GetSelectedValue(){
+				var e = document.getElementById("country");
+				var result = e.options[e.selectedIndex].value;
 
-
+				document.getElementById("result").innerHTML = result;
+			}
+</script>
 
 <%- include('../_layouts/adminfooter') %>

@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var open = require('open');
 
 // Get Product model
 var Product = require('../models/product');
@@ -18,10 +19,12 @@ router.get('/add/:product', function (req, res) {
         if (err)
             console.log(err);
 
+        
+
         if (typeof req.session.cart == "undefined") {
             req.session.cart = [];
             req.session.cart.push({
-                title: slug,
+                title: p.title,
                 qty: 1,
                 price: parseFloat(p.price).toFixed(2),
                 image: '/product_images/' + p._id + '/' + p.image,
@@ -146,8 +149,8 @@ router.get('/buynow', function (req, res) {
 
 router.post('/checkout/confirmation', async function (req, res) {
 
-    var count = await Order.countDocuments();
-    console.log('Collection number'+count);
+    var countdocu = await Order.countDocuments();
+    console.log('Collection number'+ countdocu);
 
 
     req.checkBody('name', 'Please enter your name').notEmpty();
@@ -158,6 +161,7 @@ router.post('/checkout/confirmation', async function (req, res) {
     req.checkBody('postcode', 'Postcode must have a value').notEmpty();
     req.checkBody('city', 'City must have a value').notEmpty();
     req.checkBody('state', 'State must have a value').notEmpty();
+    req.checkBody('method','Please select method').notEmpty();
     
 
     var name = req.body.name;
@@ -168,9 +172,9 @@ router.post('/checkout/confirmation', async function (req, res) {
     var postcode = req.body.postcode;
     var city = req.body.city;
     var state = req.body.state;
-
     var products = req.session.cart;
     var checkpoint = req.session.checkpoint;
+    var method= req.body.method;
     
     //console.log(req.session.cart);
     //console.log(req.session.checkpoint);
@@ -193,7 +197,7 @@ router.post('/checkout/confirmation', async function (req, res) {
     } else {
 
         var address = add1 + ' ' + add2 + ' '+ postcode + ' ' + city + ' ' + state;
-        var newID= count + 1;
+        var newID= countdocu + 1;
 
                 var order = new Order({
                     OrderID: newID,
@@ -203,6 +207,7 @@ router.post('/checkout/confirmation', async function (req, res) {
                     PhoneNum2: phone2,
                     ProductsOrdered : req.session.cart,
                     checkpoint : req.session.checkpoint,
+                    method: method
                     
                 });
                 
@@ -216,7 +221,25 @@ router.post('/checkout/confirmation', async function (req, res) {
                     req.flash('success', 'Order confirmed');
                     //res.redirect('/products');
                 });
-                console.log(products);
+                console.log(checkpoint);
+                //open('https://wasap.my/60136190975/bzr#100'+ newID);
+                switch(checkpoint){
+                    case "kempas":
+                        open('https://wasap.my/60174211077/*OrderID*:bzr100'+ newID + ' *Method*:'+ method +' *Address*:'+ address);
+                        break;
+                    case "taman-perling":
+                        open('https://wasap.my/60182448495/OrderID:bzr100'+ newID + ' *Method*:'+ method +' *Address*:'+ address );
+                        break;
+                    case "taman-daya":
+                        open('https://wasap.my/601119122797/OrderID:bzr100'+ newID + ' *Method*:'+ method +' *Address*:'+ address );
+                        break;
+                    case "mutiara-rini":
+                        open('https://wasap.my/60134618271/OrderID:bzr100'+ newID + ' *Method*:'+ method +' *Address*:'+ address );
+                        break;
+                    case "bandar-baru-uda":
+                        open('https://wasap.my/601110501015/*OrderID*:bzr100'+ newID + ' *Method*:'+ method +' *Address*:'+ address);
+                        break;
+                }
         res.render('receipt',{
                 newID: newID,
                 name: name,
@@ -226,7 +249,10 @@ router.post('/checkout/confirmation', async function (req, res) {
                 products : products,
                 checkpoint : checkpoint,
 
-        })
+        });
+
+        
+        // open('https://wasap.my/60136190975/bzr#100'+ newID);
 
         }
 });
