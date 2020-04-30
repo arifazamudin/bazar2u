@@ -1,0 +1,46 @@
+<%- include('../_layouts/adminheader') %>
+
+<h2 class="page-title">Order Management</h2>
+
+<br><br>
+
+<% Order.forEach(function(o){ %>
+<table class="table table-bordered">
+
+    <tr>
+        <th>Checkpoint</th>
+        <td><%= o.checkpoint %></td>
+    </tr>
+    <tr>
+        <th>Order ID</th>
+        <td><%= o.OrderID %></td>
+    </tr>
+    <tr>
+        <th>Method:</th>
+        <td><%= o.method %></td>
+    </tr>
+    <tr>
+        <th>Product</th>
+        <td>
+        <% o.ProductsOrdered.forEach(function(p){ %>
+         <p><%=p.qty%> - <%= p.title %></p>
+        <% }); %>
+        </td>
+    </tr>
+    <tr>
+        <th>Method:</th>
+        <td><%= o.method %></td>
+    </tr>
+    <!-- <tr>
+        <td><a class="confirmDeletion" href="/admin/orders/delete-order/<%= o._id %>">Delete</a></td>
+    </tr>
+    -->
+</table>
+
+<br><br>
+<% }); %>
+
+
+
+
+<%- include('../_layouts/adminfooter') %>

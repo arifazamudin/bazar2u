@@ -225,21 +225,21 @@ router.post('/checkout/confirmation', async function (req, res) {
                 //open('https://wasap.my/60136190975/bzr#100'+ newID);
                 switch(checkpoint){
                     case "kempas":
-                        await open('https://wasap.my/60174211077/*OrderID*:bzr100'+ newID + ' *Method*:'+ method +' *Address*:'+ address);
+                        await open('https://wasap.my/60174211077/*OrderID*:bzr100'+ newID + ' *Method*:'+ method );
                         break;
                     case "taman-perling":
-                        await open('https://wasap.my/60182448495/OrderID:bzr100'+ newID + ' *Method*:'+ method +' *Address*:'+ address );
+                        await open('https://wasap.my/60182448495/OrderID:bzr100'+ newID + ' *Method*:'+ method );
                         break;
                     case "taman-daya":
-                        await open('https://wasap.my/601119122797/OrderID:bzr100'+ newID + ' *Method*:'+ method +' *Address*:'+ address );
+                        await open('https://wasap.my/601119122797/OrderID:bzr100'+ newID + ' *Method*:'+ method  );
                         break;
                     case "mutiara-rini":
-                        await open('https://wasap.my/60134618271/OrderID:bzr100'+ newID + ' *Method*:'+ method +' *Address*:'+ address );
+                        await open('https://wasap.my/60134618271/OrderID:bzr100'+ newID + ' *Method*:'+ method  );
                         break;
                     case "bandar-baru-uda":
-                        await open('https://wasap.my/601110501015/*OrderID*:bzr100'+ newID + ' *Method*:'+ method +' *Address*:'+ address);
+                        await open('https://wasap.my/601110501015/*OrderID*:bzr100'+ newID + ' *Method*:'+ method );
                         break;
-                }
+                };
         res.render('receipt',{
                 newID: newID,
                 name: name,

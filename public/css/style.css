@@ -141,6 +141,10 @@ html {
   .text-primary {
     color: #FDA403 !important;
   }
+
+  p.besar-sikit{
+    font-size: 18px;
+  }
   
   .site-navbar-light {
     background: rgb(179, 27, 27) !important;
