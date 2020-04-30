@@ -7,10 +7,11 @@
 <select name="checkpoint" class="form-control" id="checkp">
     <% checkpoints.forEach(function(cpt){ %>
         <option value="<%= cpt.slug %>"><%= cpt.title %></option>
-    <% }); %>
+    
 </select>
 
-<a href="/admin/orders/sort" class="btn btn-primary" onclick="GetSelectedValue()" >Find</a>
+<a href="/admin/orders/<%= cpt.slug %>" class="btn btn-primary"  >Find <%= cpt.title %></a>
+<% }); %>
   <br><br>
 
 <% Order.forEach(function(o){ %>

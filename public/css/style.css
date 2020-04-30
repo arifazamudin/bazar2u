@@ -119,6 +119,11 @@ html {
     transition: .3s all ease;
     color: rgb(0, 0, 0);
   }
+
+  a.white{
+    color: rgb(255, 255, 255);
+
+  }
   
   a:hover {
     text-decoration: none;
